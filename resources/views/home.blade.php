@@ -28,10 +28,10 @@
                     id="txchange">Foursichology</span>
             </a>
             <div class="flex md:order-2">
-                <button type="button" id="btnLogin"
+                <a href="{{ route('login') }}" id="btnLogin"
                     class="mr-3 rounded-lg border bg-white px-4 py-2 text-center text-sm font-medium text-teal-700 hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-white md:mr-0">
                     Login
-                </button>
+                </a>
                 <button data-collapse-toggle="navbar-sticky" type="button"
                     class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
                     aria-controls="navbar-sticky" aria-expanded="false">

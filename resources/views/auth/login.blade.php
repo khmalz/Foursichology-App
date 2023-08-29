@@ -1,48 +1,66 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="mt-1 block w-full" type="email" name="email" :value="old('email')" required
-                autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <title>Foursichology</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Foursichology" name="keywords" />
+    <meta content="Provide information about the importance of mental health" name="description" />
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('frontend/plugins/fontawesome-free/css/all.min.css') }}">
 
-            <x-text-input id="password" class="mt-1 block w-full" type="password" name="password" required
-                autocomplete="current-password" />
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+<body class="flex min-h-screen items-center justify-center bg-slate-200">
+    <div
+        class="w-[90%] border bg-white p-5 shadow-2xl md:flex md:h-auto md:w-1/2 md:flex-col md:justify-center md:rounded-lg md:rounded-r-none lg:w-1/3">
+        <h1 class="font-poppins mb-2 text-2xl font-light">Login</h1>
+        <hr class="mb-4 border border-t-0 border-slate-200" />
+        @if ($errors->any())
+            <p class="mt-2 text-center text-red-600">The credentials were invalid</p>
+        @endif
+        <form action="{{ route('login') }}" method="post">
+            @csrf
+            <div class="mb-4">
+                <label for="name" class="font-poppins mb-2 block text-sm font-semibold text-slate-700">Email</label>
+                <input autofocus type="text"
+                    class="w-full rounded-lg px-4 py-2 text-slate-800 placeholder:text-sm placeholder:text-slate-600/50 focus:border-emerald-700/90 focus:outline-none focus:ring-emerald-700/90"
+                    placeholder="Input Your Email" id="email" name="email" value="{{ old('email') }}" />
+            </div>
+            <div class="mb-4">
+                <label for="password"
+                    class="font-poppins mb-2 block text-sm font-semibold text-slate-700">Password</label>
+                <input type="password"
+                    class="w-full rounded-lg px-4 py-2 text-slate-800 placeholder:text-sm placeholder:text-slate-600/50 focus:border-emerald-700/90 focus:outline-none focus:ring-emerald-700/90"
+                    placeholder="Input Your Password" id="password" name="password" />
+            </div>
+            <div class="mb-4 flex items-center justify-between md:mb-2">
+                <a href="{{ route('password.request') }}" class="text-sm text-emerald-700 hover:text-emerald-800">Forgot
+                    Your Password?</a>
+                <a href="{{ route('register') }}" class="text-sm text-emerald-700 hover:text-emerald-800">Don't
+                    Have an Account?</a>
+            </div>
+            <button type="submit"
+                class="w-1/4 place-self-end rounded bg-emerald-600/90 px-4 py-1.5 text-white transition duration-300 hover:bg-emerald-700/90 focus:outline-none md:mt-5">
+                Login
+            </button>
+        </form>
 
-        <!-- Remember Me -->
-        <div class="mt-4 block">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox"
-                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+        <a href="{{ route('home') }}" class="mt-6 flex items-center gap-x-1 text-[13px]"><span>&larr;</span> Back To
+            Home</a>
+    </div>
 
-        <div class="mt-4 flex items-center justify-end">
-            @if (Route::has('password.request'))
-                <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
+</body>
 
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>
