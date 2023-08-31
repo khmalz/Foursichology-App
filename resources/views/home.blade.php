@@ -27,10 +27,10 @@
         <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
             <a href="https://flowbite.com/" class="flex items-center">
                 <span class="self-center whitespace-nowrap text-2xl font-semibold text-white"
-                    id="txchange">Foursichology</span>
+                    id="textTitle">Foursichology</span>
             </a>
             <div class="flex md:order-2">
-                <button type="button" id="user-menu-button" data-dropdown-toggle="user-dropdown" aria-expanded="false"
+                <button type="button" id="textWelcome" data-dropdown-toggle="user-dropdown" aria-expanded="false"
                     class="inline-flex cursor-pointer items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-gray-900">
                     Welcome
                 </button>
@@ -41,7 +41,7 @@
                         <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
                         <span class="block truncate text-sm text-gray-500 dark:text-gray-400">name@flowbite.com</span>
                     </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
+                    <ul class="py-2" aria-labelledby="textWelcome">
                         <li>
                             <a href="#"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200">Dashboard</a>
@@ -280,6 +280,8 @@
         document.addEventListener("DOMContentLoaded", function() {
             let nav = $("#navbar").get(0);
             let texts = document.querySelectorAll("#txchange");
+            let textTitle = $("#textTitle").get(0);
+            let textWelcome = $("#textWelcome").get(0);
             let textActive = $("#txchangeActive").get(0);
             let loginButton = $("#btnLogin").get(0);
             let hamburgerMenu = $("#hamburgerMenu").get(0);
@@ -304,6 +306,12 @@
                     texts.forEach((text) => {
                         text.classList.remove("md:text-white");
                     });
+
+                    textTitle.classList.remove('text-white')
+                    textTitle.classList.add('text-dark')
+
+                    textWelcome.classList.remove('text-white')
+                    textWelcome.classList.add('text-dark')
 
                     hamburgerMenu.classList.add("text-emerald-700")
                     hamburgerMenu.classList.remove("text-white")
@@ -335,6 +343,12 @@
                     texts.forEach((text) => {
                         text.classList.remove("md:text-dark");
                     });
+
+                    textTitle.classList.remove('text-dark')
+                    textTitle.classList.add('text-white')
+
+                    textWelcome.classList.remove('text-dark')
+                    textWelcome.classList.add('text-white')
 
                     hamburgerMenu.classList.add("text-white")
                     hamburgerMenu.classList.remove("text-emerald-700")
