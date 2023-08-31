@@ -80,11 +80,11 @@
                     <li>
                         <a href="{{ url('#home') }}"
                             class="block rounded bg-teal-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0"
-                            aria-current="page" id="txchange">Home</a>
+                            aria-current="page" id="txchangeActive">Home</a>
                     </li>
                     <li>
                         <a href="{{ url('#about') }}" id="txchange"
-                            class="text-emerald block rounded py-2 pl-3 pr-4 hover:bg-gray-200/80 md:p-0 md:text-white md:hover:bg-transparent">About</a>
+                            class="block rounded py-2 pl-3 pr-4 hover:bg-gray-200/80 md:p-0 md:text-white md:hover:bg-transparent">About</a>
                     </li>
                 </ul>
             </div>
@@ -280,8 +280,10 @@
         document.addEventListener("DOMContentLoaded", function() {
             let nav = $("#navbar").get(0);
             let texts = document.querySelectorAll("#txchange");
+            let textActive = $("#txchangeActive").get(0);
             let loginButton = $("#btnLogin").get(0);
             let hamburgerMenu = $("#hamburgerMenu").get(0);
+            let width = window.innerWidth;
             window.onscroll = function() {
                 if (window.scrollY >= 150) {
                     nav.classList.add(
@@ -289,44 +291,62 @@
                         "shadow",
                         "backdrop-blur-[1px]"
                     );
-                    texts.forEach((text) => {
-                        text.classList.add("text-dark");
-                    });
-                    hamburgerMenu.classList.add("text-emerald-700")
-
                     nav.classList.remove("bg-transparent");
+
+                    if (width >= 768) {
+                        textActive.classList.remove('text-white')
+                        textActive.classList.add('text-dark')
+                    }
+
                     texts.forEach((text) => {
-                        text.classList.remove("text-white");
+                        text.classList.add("md:text-dark");
                     });
-                    loginButton.classList.remove(
-                        "bg-white",
-                        "hover:text-white",
-                        "hover:bg-transparent",
-                    );
-                    loginButton.classList.add('border-teal-700', 'hover:bg-white', 'hover:border-white');
+                    texts.forEach((text) => {
+                        text.classList.remove("md:text-white");
+                    });
+
+                    hamburgerMenu.classList.add("text-emerald-700")
                     hamburgerMenu.classList.remove("text-white")
+
+                    if (loginButton) {
+                        loginButton.classList.remove(
+                            "bg-white",
+                            "hover:text-white",
+                            "hover:bg-transparent",
+                        );
+                        loginButton.classList.add('border-teal-700', 'hover:bg-white', 'hover:border-white');
+                    }
                 } else {
                     nav.classList.remove(
                         "bg-white/70",
                         "shadow",
                         "backdrop-blur-[1px]"
                     );
-                    texts.forEach((text) => {
-                        text.classList.add("text-white");
-                    });
-                    loginButton.classList.add(
-                        "bg-white",
-                        "hover:text-white",
-                        "hover:bg-transparent",
-                    );
-                    loginButton.classList.remove('border-teal-700', 'hover:bg-white');
-                    hamburgerMenu.classList.add("text-white")
-
                     nav.classList.add("bg-transparent");
+
+                    if (width >= 768) {
+                        textActive.classList.remove('text-dark')
+                        textActive.classList.add('text-white')
+                    }
+
                     texts.forEach((text) => {
-                        text.classList.remove("text-dark");
+                        text.classList.add("md:text-white");
                     });
+                    texts.forEach((text) => {
+                        text.classList.remove("md:text-dark");
+                    });
+
+                    hamburgerMenu.classList.add("text-white")
                     hamburgerMenu.classList.remove("text-emerald-700")
+
+                    if (loginButton) {
+                        loginButton.classList.add(
+                            "bg-white",
+                            "hover:text-white",
+                            "hover:bg-transparent",
+                        );
+                        loginButton.classList.remove('border-teal-700', 'hover:bg-white');
+                    }
                 }
             };
 
