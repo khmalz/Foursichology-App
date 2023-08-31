@@ -18,6 +18,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -28,12 +30,41 @@
                     id="txchange">Foursichology</span>
             </a>
             <div class="flex md:order-2">
-                <a href="{{ route('login') }}" id="btnLogin"
+                <button type="button" id="user-menu-button" data-dropdown-toggle="user-dropdown" aria-expanded="false"
+                    class="inline-flex cursor-pointer items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-gray-900">
+                    Welcome
+                </button>
+                <!-- Dropdown menu -->
+                <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                        <span class="block truncate text-sm text-gray-500 dark:text-gray-400">name@flowbite.com</span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200">Settings</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200">Sign
+                                out</a>
+                        </li>
+                    </ul>
+                </div>
+
+                {{-- <a href="{{ route('login') }}" id="btnLogin"
                     class="mr-3 rounded-lg border bg-white px-4 py-2 text-center text-sm font-medium text-teal-700 hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-white md:mr-0">
                     Login
-                </a>
-                <button data-collapse-toggle="navbar-sticky" type="button"
-                    class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
+                </a> --}}
+
+                <button id="hamburgerMenu" data-collapse-toggle="navbar-sticky" type="button"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-white hover:bg-gray-100 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden"
                     aria-controls="navbar-sticky" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -45,7 +76,7 @@
             </div>
             <div class="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto" id="navbar-sticky">
                 <ul
-                    class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-transparent md:p-0">
+                    class="mt-4 flex flex-col space-y-2 rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:space-y-0 md:border-0 md:bg-transparent md:p-0">
                     <li>
                         <a href="{{ url('#home') }}"
                             class="block rounded bg-teal-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0"
@@ -53,7 +84,7 @@
                     </li>
                     <li>
                         <a href="{{ url('#about') }}" id="txchange"
-                            class="block rounded py-2 pl-3 pr-4 text-white hover:bg-gray-100 md:p-0 md:hover:bg-transparent">About</a>
+                            class="text-emerald block rounded py-2 pl-3 pr-4 hover:bg-gray-200/80 md:p-0 md:text-white md:hover:bg-transparent">About</a>
                     </li>
                 </ul>
             </div>
@@ -250,6 +281,7 @@
             let nav = $("#navbar").get(0);
             let texts = document.querySelectorAll("#txchange");
             let loginButton = $("#btnLogin").get(0);
+            let hamburgerMenu = $("#hamburgerMenu").get(0);
             window.onscroll = function() {
                 if (window.scrollY >= 150) {
                     nav.classList.add(
@@ -260,6 +292,7 @@
                     texts.forEach((text) => {
                         text.classList.add("text-dark");
                     });
+                    hamburgerMenu.classList.add("text-emerald-700")
 
                     nav.classList.remove("bg-transparent");
                     texts.forEach((text) => {
@@ -267,8 +300,11 @@
                     });
                     loginButton.classList.remove(
                         "bg-white",
-                        "hover:text-white"
+                        "hover:text-white",
+                        "hover:bg-transparent",
                     );
+                    loginButton.classList.add('border-teal-700', 'hover:bg-white', 'hover:border-white');
+                    hamburgerMenu.classList.remove("text-white")
                 } else {
                     nav.classList.remove(
                         "bg-white/70",
@@ -280,13 +316,17 @@
                     });
                     loginButton.classList.add(
                         "bg-white",
-                        "hover:text-white"
+                        "hover:text-white",
+                        "hover:bg-transparent",
                     );
+                    loginButton.classList.remove('border-teal-700', 'hover:bg-white');
+                    hamburgerMenu.classList.add("text-white")
 
                     nav.classList.add("bg-transparent");
                     texts.forEach((text) => {
                         text.classList.remove("text-dark");
                     });
+                    hamburgerMenu.classList.remove("text-emerald-700")
                 }
             };
 
