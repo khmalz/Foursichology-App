@@ -17,13 +17,18 @@ class PermissionSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $adminPermissions = [
+        $superAdminPermissions = [
             'laporan_access',
-            'laporan_edit',
             'guru_access',
             'guru_manage',
             'siswa_access',
             'siswa_manage',
+        ];
+
+        $adminPermission = [
+            'laporan_access',
+            'laporan_edit',
+            'siswa_access',
         ];
 
         $siswaPermission = [
@@ -31,18 +36,7 @@ class PermissionSeeder extends Seeder
             'laporan_create'
         ];
 
-        $guruPermission = [
-            'laporan_access',
-            'laporan_edit',
-            'siswa_access',
-        ];
-
-        $kepsekPermission = [
-            'laporan_access',
-            'siswa_access',
-        ];
-
-        $allPermission = array_unique(array_merge($adminPermissions, $siswaPermission, $guruPermission, $kepsekPermission));
+        $allPermission = array_unique(array_merge($superAdminPermissions, $siswaPermission, $adminPermission));
 
         foreach ($allPermission as $permission) {
             Permission::create([
@@ -50,23 +44,17 @@ class PermissionSeeder extends Seeder
             ]);
         }
 
-        $role = Role::create(['name' => 'Admin']);
-        foreach ($adminPermissions as $permission) {
+        $role = Role::create(['name' => 'super admin']);
+        foreach ($superAdminPermissions as $permission) {
             $role->givePermissionTo($permission);
         }
-        $role = Role::create(['name' => 'Kepala Sekolah']);
+        $role = Role::create(['name' => 'admin']);
 
-        foreach ($kepsekPermission as $permission) {
-            $role->givePermissionTo($permission);
-        }
-
-        $role = Role::create(['name' => 'Guru']);
-
-        foreach ($guruPermission as $permission) {
+        foreach ($adminPermission as $permission) {
             $role->givePermissionTo($permission);
         }
 
-        $role = Role::create(['name' => 'Siswa']);
+        $role = Role::create(['name' => 'siswa']);
         foreach ($siswaPermission as $permission) {
             $role->givePermissionTo($permission);
         }

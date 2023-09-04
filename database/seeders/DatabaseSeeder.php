@@ -19,16 +19,16 @@ class DatabaseSeeder extends Seeder
         // $nama = fake()->name;
         // $namaPenggunaEmail = Str::lower(strtok($nama, ' ') . strtok(' '));
 
-        $this->call(PermissionSeeder::class);
+        $this->call([PermissionSeeder::class]);
 
         $admin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'name' => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10)
         ]);
-        $admin->assignRole('Admin');
+        $admin->assignRole('super admin');
 
         $kepsek = User::create([
             'name' => 'Kepala Sekolah',
@@ -37,24 +37,33 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10)
         ]);
-        $kepsek->assignRole('Kepala Sekolah');
+        $kepsek->assignRole('admin');
 
         $guru = User::create([
-            'name' => 'Guru A',
-            'email' => 'guru1@gmail.com',
+            'name' => 'Guru BK 1',
+            'email' => 'gurubk1@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10)
         ]);
-        $guru->assignRole('Guru');
+        $guru->assignRole('admin');
 
         $guru = User::create([
-            'name' => 'Guru B',
-            'email' => 'guru2@gmail.com',
+            'name' => 'Guru BK 1',
+            'email' => 'gurubk2@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10)
         ]);
-        $guru->assignRole('Guru');
+        $guru->assignRole('admin');
+
+        $siswa = User::create([
+            'name' => 'Khairul Akmal',
+            'email' => 'akmal@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'remember_token' => Str::random(10)
+        ]);
+        $siswa->assignRole('siswa');
     }
 }
