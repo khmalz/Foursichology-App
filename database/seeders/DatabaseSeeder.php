@@ -65,5 +65,12 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
         $siswa->assignRole('siswa');
+
+        $siswa->student()->create([
+            'nis' => "11815",
+            'jurusan' => 'rpl',
+            'kelas' => '12',
+            'gender' => 'L',
+        ]);
     }
 }
