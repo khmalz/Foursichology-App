@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Student::class);
             $table->text('description');
             $table->boolean('anonim')->default(false);
+            $table->enum('status', ['pending', 'progress', 'solve'])->default('pending');
             $table->timestamps();
         });
     }

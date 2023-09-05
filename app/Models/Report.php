@@ -15,6 +15,7 @@ class Report extends Model
         'student_id',
         'description',
         'anonim',
+        'status',
     ];
 
     public function images(): HasMany
