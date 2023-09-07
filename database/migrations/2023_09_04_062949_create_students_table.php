@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\User::class)->cascadeOnDelete();
             $table->string('nis')->unique();
             $table->enum('jurusan', ['akl 1', 'akl 2', 'bdp 1', 'bdp 2', 'otkp 1', 'otkp 2', 'dkv', 'rpl']);
             $table->enum('kelas',  ['10', '11', '12']);
