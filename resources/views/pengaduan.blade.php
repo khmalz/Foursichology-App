@@ -41,7 +41,7 @@
                     </div>
                     <ul class="py-2" aria-labelledby="textWelcome">
                         <li>
-                            <a href="#"
+                            <a href="{{ route('dashboard') }}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
                         </li>
                         <li>
@@ -49,8 +49,11 @@
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaduan</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
-                                out</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit"
+                                    class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
