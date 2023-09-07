@@ -42,12 +42,6 @@
                     class="w-full rounded-lg px-4 py-2 text-slate-800 placeholder:text-sm placeholder:text-slate-600/50 focus:border-emerald-700/90 focus:outline-none focus:ring-emerald-700/90"
                     placeholder="Input Your Password" id="password" name="password" />
             </div>
-            <div class="mb-4 flex items-center justify-between md:mb-2">
-                <a href="{{ route('password.request') }}" class="text-sm text-emerald-700 hover:text-emerald-800">Forgot
-                    Your Password?</a>
-                <a href="{{ route('register') }}" class="text-sm text-emerald-700 hover:text-emerald-800">Don't
-                    Have an Account?</a>
-            </div>
             <button type="submit"
                 class="w-1/4 place-self-end rounded bg-emerald-600/90 px-4 py-1.5 text-white transition duration-300 hover:bg-emerald-700/90 focus:outline-none md:mt-5">
                 Login

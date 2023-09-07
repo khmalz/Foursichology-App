@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => view('home'))->name('home');
-Route::get('/pengaduan', fn () => view('pengaduan'))->name('pengaduan');
-Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+    Route::get('/pengaduan', [ReportController::class, 'index'])->name('pengaduan.index');
+    Route::post('/pengaduan', [ReportController::class, 'store'])->name('pengaduan.store');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
