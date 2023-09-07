@@ -40,36 +40,39 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('charts.html') }}">
-            <i class="fas fa-fw fa-info-circle"></i>
-            <span>Inbox</span>
-        </a>
+    @role('admin')
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('charts.html') }}">
+                <i class="fas fa-fw fa-info-circle"></i>
+                <span>Inbox</span>
+            </a>
+        </li>
+    @endrole
 
-    </li>
+    @role('super admin')
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Account
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('#') }}" data-toggle="collapse" data-target="#userTab"
-            aria-expanded="true" aria-controls="userTab">
-            <i class="fas fa-fw fa-user"></i>
-            <span>User</span>
-        </a>
-        <div id="userTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="collapse-inner rounded bg-white py-2">
-                <a class="collapse-item" href="#">Siswa</a>
-                <a class="collapse-item" href="#">Guru</a>
-            </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Account
         </div>
-    </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ url('#') }}" data-toggle="collapse" data-target="#userTab"
+                aria-expanded="true" aria-controls="userTab">
+                <i class="fas fa-fw fa-user"></i>
+                <span>User</span>
+            </a>
+            <div id="userTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="collapse-inner rounded bg-white py-2">
+                    <a class="collapse-item" href="#">Siswa</a>
+                    <a class="collapse-item" href="#">Guru</a>
+                </div>
+            </div>
+        </li>
+    @endrole
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

@@ -23,7 +23,7 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
