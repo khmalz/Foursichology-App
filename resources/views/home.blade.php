@@ -310,12 +310,6 @@
                         text.classList.remove("md:text-white");
                     });
 
-                    textTitle.classList.remove('text-white')
-                    textTitle.classList.add('text-dark')
-
-                    textWelcome.classList.remove('text-white')
-                    textWelcome.classList.add('text-dark')
-
                     hamburgerMenu.classList.add("text-emerald-700")
                     hamburgerMenu.classList.remove("text-white")
 
@@ -325,7 +319,14 @@
                             "hover:text-white",
                             "hover:bg-transparent",
                         );
-                        loginButton.classList.add('border-teal-700', 'hover:bg-white', 'hover:border-white');
+                        loginButton.classList.add('border-teal-700', 'hover:bg-white', 'hover:border-white',
+                            'hover:text-teal-700');
+                    } else {
+                        textTitle.classList.remove('text-white')
+                        textTitle.classList.add('text-dark')
+
+                        textWelcome.classList.remove('text-white')
+                        textWelcome.classList.add('text-dark')
                     }
                 } else {
                     nav.classList.remove(
@@ -347,12 +348,6 @@
                         text.classList.remove("md:text-dark");
                     });
 
-                    textTitle.classList.remove('text-dark')
-                    textTitle.classList.add('text-white')
-
-                    textWelcome.classList.remove('text-dark')
-                    textWelcome.classList.add('text-white')
-
                     hamburgerMenu.classList.add("text-white")
                     hamburgerMenu.classList.remove("text-emerald-700")
 
@@ -362,7 +357,14 @@
                             "hover:text-white",
                             "hover:bg-transparent",
                         );
-                        loginButton.classList.remove('border-teal-700', 'hover:bg-white');
+                        loginButton.classList.remove('border-teal-700', 'hover:bg-white', 'hover:border-white',
+                            'hover:text-teal-700');
+                    } else {
+                        textTitle.classList.remove('text-dark')
+                        textTitle.classList.add('text-white')
+
+                        textWelcome.classList.remove('text-dark')
+                        textWelcome.classList.add('text-white')
                     }
                 }
             };
