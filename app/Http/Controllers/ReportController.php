@@ -12,7 +12,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        return view('pengaduan');
     }
 
     /**
@@ -28,7 +28,27 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'student_id' => ['required'],
+            'description' => ['required', 'string', 'max:300'],
+            'anonim' => ['nullable'],
+            'images' => ['required', 'array', 'min:1'],
+            'images.*' => ['required', 'file', 'image', 'mimes:png,jpg,jpeg', 'max:5120'],
+        ]);
+
+        $report = Report::create($data);
+
+        $images = $request->file('images');
+
+        foreach ($images as $image) {
+            $imagePath = $image->store('evidences');
+
+            $report->images()->create([
+                'path' => $imagePath,
+            ]);
+        }
+
+        return to_route('pengaduan.index')->with('success', 'Successfully created new report');
     }
 
     /**

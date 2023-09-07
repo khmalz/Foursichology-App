@@ -25,43 +25,46 @@
 <body>
     <nav id="navbar" class="fixed left-0 top-0 z-20 w-full bg-transparent transition-all duration-700">
         <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-            <a href="https://flowbite.com/" class="flex items-center">
+            <a href="{{ route('home') }}" class="flex items-center">
                 <span class="self-center whitespace-nowrap text-2xl font-semibold text-white"
                     id="textTitle">Foursichology</span>
             </a>
             <div class="flex md:order-2">
-                <button type="button" id="textWelcome" data-dropdown-toggle="user-dropdown" aria-expanded="false"
-                    class="inline-flex cursor-pointer items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-gray-900">
-                    Welcome
-                </button>
-                <!-- Dropdown menu -->
-                <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                        <span class="block truncate text-sm text-gray-500 dark:text-gray-400">name@flowbite.com</span>
+                @auth
+                    <button type="button" id="textWelcome" data-dropdown-toggle="user-dropdown" aria-expanded="false"
+                        class="inline-flex cursor-pointer items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-gray-900">
+                        Welcome
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow"
+                        id="user-dropdown">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900">{{ auth()->user()->name }}</span>
+                            <span class="block truncate text-sm text-gray-500">{{ auth()->user()->email }}</span>
+                        </div>
+                        <ul class="py-2" aria-labelledby="textWelcome">
+                            <li>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                            </li>
+                            @role('siswa')
+                                <li>
+                                    <a href="{{ route('pengaduan.index') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaduan</a>
+                                </li>
+                            @endrole
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
+                                    out</a>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="py-2" aria-labelledby="textWelcome">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200">Sign
-                                out</a>
-                        </li>
-                    </ul>
-                </div>
-
-                {{-- <a href="{{ route('login') }}" id="btnLogin"
-                    class="mr-3 rounded-lg border bg-white px-4 py-2 text-center text-sm font-medium text-teal-700 hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-white md:mr-0">
-                    Login
-                </a> --}}
+                @else
+                    <a href="{{ route('login') }}" id="btnLogin"
+                        class="mr-3 rounded-lg border bg-white px-4 py-2 text-center text-sm font-medium text-teal-700 hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-white md:mr-0">
+                        Login
+                    </a>
+                @endauth
 
                 <button id="hamburgerMenu" data-collapse-toggle="navbar-sticky" type="button"
                     class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-white hover:bg-gray-100 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden"
@@ -217,13 +220,13 @@
                     </ul>
                 </div>
             </div>
-            <hr class="my-6 border-gray-200 dark:border-gray-700 sm:mx-auto lg:my-8" />
+            <hr class="border-gray-200sm:mx-auto my-6 lg:my-8" />
             <div class="sm:flex sm:items-center sm:justify-between">
-                <span class="text-sm text-gray-500 dark:text-gray-400 sm:text-center">© 2023 <a
-                        href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
+                <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="https://flowbite.com/"
+                        class="hover:underline">Flowbite™</a>. All Rights Reserved.
                 </span>
                 <div class="mt-4 flex space-x-5 sm:mt-0 sm:justify-center">
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="#" class="text-gray-500 hover:text-gray-900">
                         <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 8 19">
                             <path fill-rule="evenodd"
@@ -232,7 +235,7 @@
                         </svg>
                         <span class="sr-only">Facebook page</span>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="#" class="text-gray-500 hover:text-gray-900">
                         <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 21 16">
                             <path
@@ -240,7 +243,7 @@
                         </svg>
                         <span class="sr-only">Discord community</span>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="#" class="text-gray-500 hover:text-gray-900">
                         <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 20 17">
                             <path fill-rule="evenodd"
@@ -249,7 +252,7 @@
                         </svg>
                         <span class="sr-only">Twitter page</span>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="#" class="text-gray-500 hover:text-gray-900">
                         <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
@@ -258,7 +261,7 @@
                         </svg>
                         <span class="sr-only">GitHub account</span>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="#" class="text-gray-500 hover:text-gray-900">
                         <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
