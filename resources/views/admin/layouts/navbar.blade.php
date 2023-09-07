@@ -88,14 +88,14 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="{{ url('#') }}" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="d-none d-lg-inline small mr-2 text-gray-600">Douglas McGee</span>
+                <span class="d-none d-lg-inline small mr-2 text-gray-600">{{ auth()->user()->name }}</span>
                 <img class="img-profile rounded-circle" src="{{ asset('admin/img/undraw_profile.svg') }}">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right animated--grow-in shadow" aria-labelledby="userDropdown">
                 <span class="dropdown-item">
                     <i class="fas fa-envelope fa-sm fa-fw mr-2 text-gray-400"></i>
-                    admin@gmail.com
+                    {{ auth()->user()->email }}
                 </span>
                 {{-- <a class="dropdown-item" href="{{ url('#') }}">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -125,10 +125,13 @@
                 </button>
             </div>
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{ url('login.html') }}">Logout</a>
-            </div>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Logout</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -70,9 +70,14 @@
                 <ul
                     class="mt-4 flex flex-col space-y-2 rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:space-y-0 md:border-0 md:bg-transparent md:p-0">
                     <li>
-                        <a href="{{ url('#home') }}"
+                        <a href="{{ route('home') }}"
                             class="block rounded bg-teal-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0"
                             aria-current="page" id="txchange">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard') }}"
+                            class="block rounded bg-teal-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0"
+                            aria-current="page" id="txchange">Dashboard</a>
                     </li>
                 </ul>
             </div>

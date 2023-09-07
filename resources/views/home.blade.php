@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8">
@@ -44,7 +44,7 @@
                         </div>
                         <ul class="py-2" aria-labelledby="textWelcome">
                             <li>
-                                <a href="#"
+                                <a href="{{ route('dashboard') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
                             </li>
                             @role('siswa')
@@ -54,8 +54,11 @@
                                 </li>
                             @endrole
                             <li>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
-                                    out</a>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit"
+                                        class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -169,10 +172,10 @@
                         selalu membimbing mu!.Masukan emailmu dan klik link yang di berikan agar kamu bisa konsultasi
                     </p>
                     <div>
-                        <button type="button"
+                        <a href="{{ route('pengaduan.index') }}"
                             class="mb-2 mr-2 rounded-lg border px-5 py-2.5 text-center text-xs font-medium text-white hover:bg-white hover:text-emerald-600/90 focus:outline-none focus:ring-emerald-300 md:text-sm">
                             Lapor
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="flex justify-center">
