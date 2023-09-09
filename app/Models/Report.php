@@ -18,6 +18,15 @@ class Report extends Model
         'status',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
+
+    public function scopeWhereStatus($query, string $status)
+    {
+        return $query->where('status', $status);
+    }
+
     public function images(): HasMany
     {
         return $this->hasMany(ReportImages::class);

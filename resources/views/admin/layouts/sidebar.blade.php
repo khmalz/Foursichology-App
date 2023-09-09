@@ -12,8 +12,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('home') }}">
+    <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Dashboard</span></a>
     </li>
@@ -32,10 +32,20 @@
             <i class="fas fa-fw fa-paste"></i>
             <span>Laporan</span>
         </a>
-        <div id="laporanTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="laporanTab" class="{{ request()->routeIs('report.*') ? 'show' : '' }} collapse"
+            aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
-                <a class="collapse-item" href="{{ url('buttons.html') }}">Belum Selesai</a>
-                <a class="collapse-item" href="{{ url('cards.html') }}">Sudah Selesai</a>
+                @hasanyrole('super admin|admin')
+                    <a class="collapse-item {{ request()->routeIs('report.pending') ? 'active' : '' }}"
+                        href="{{ route('report.pending') }}">Belum Selesai</a>
+                    <a class="collapse-item {{ request()->routeIs('report.solve') ? 'active' : '' }}"
+                        href="{{ route('report.solve') }}">Sudah Selesai</a>
+                @else
+                    <a class="collapse-item {{ request()->routeIs('my-report.pending') ? 'active' : '' }}"
+                        href="{{ route('my-report.pending') }}">Belum Selesai</a>
+                    <a class="collapse-item {{ request()->routeIs('my-report.solve') ? 'active' : '' }}"
+                        href="{{ route('my-report.solve') }}">Sudah Selesai</a>
+                @endhasanyrole
             </div>
         </div>
     </li>
