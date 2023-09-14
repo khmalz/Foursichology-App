@@ -57,7 +57,9 @@ class ReportListController extends Controller
      */
     public function show(Report $report)
     {
-        //
+        $report->load('student.user', 'images');
+
+        return view('admin.reports.detail', compact('report'));
     }
 
     /**
