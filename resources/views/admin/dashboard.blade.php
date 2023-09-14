@@ -19,8 +19,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="font-weight-bold text-primary text-uppercase mb-1 text-xs">
-                                            Guru</div>
-                                        <div class="h5 font-weight-bold mb-0 text-gray-800">3</div>
+                                            Admin</div>
+                                        <div class="h5 font-weight-bold mb-0 text-gray-800">{{ $adminCount }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
@@ -39,7 +39,7 @@
                                 <div class="col mr-2">
                                     <div class="font-weight-bold text-success text-uppercase mb-1 text-xs">
                                         Siswa</div>
-                                    <div class="h5 font-weight-bold mb-0 text-gray-800">100</div>
+                                    <div class="h5 font-weight-bold mb-0 text-gray-800">{{ $siswaCount }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-user-tag fa-2x text-gray-300"></i>
@@ -57,7 +57,7 @@
                                 <div class="col mr-2">
                                     <div class="font-weight-bold text-warning text-uppercase mb-1 text-xs">
                                         Pending Report</div>
-                                    <div class="h5 font-weight-bold mb-0 text-gray-800">18</div>
+                                    <div class="h5 font-weight-bold mb-0 text-gray-800">{{ $pendingReportCount }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-clipboard fa-2x text-gray-300"></i>
@@ -75,7 +75,7 @@
                                 <div class="col mr-2">
                                     <div class="font-weight-bold text-info text-uppercase mb-1 text-xs">
                                         Solve Report</div>
-                                    <div class="h5 font-weight-bold mb-0 text-gray-800">18</div>
+                                    <div class="h5 font-weight-bold mb-0 text-gray-800">{{ $solveReportCount }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-clipboard fa-2x text-gray-300"></i>
@@ -106,32 +106,32 @@
                                             <td>
                                                 <div class="font-weight-bold">Nama</div>
                                             </td>
-                                            <td class="font-weight-bold">{{ auth()->user()->name }}</td>
+                                            <td class="font-weight-bold">{{ $user->name }}</td>
                                         </tr>
                                         <tr class="border-bottom">
                                             <td>
                                                 <div class="font-weight-bold">NIS</div>
                                             </td>
-                                            <td class="font-weight-bold">{{ auth()->user()->student->nis }}</td>
+                                            <td class="font-weight-bold">{{ $user->student->nis }}</td>
                                         </tr>
                                         <tr class="border-bottom">
                                             <td>
                                                 <div class="font-weight-bold">Gender</div>
                                             </td>
                                             <td class="font-weight-bold">
-                                                {{ auth()->user()->student->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                                {{ $user->student->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                         </tr>
                                         <tr class="border-bottom">
                                             <td>
                                                 <div class="font-weight-bold">Kelas</div>
                                             </td>
-                                            <td class="font-weight-bold">{{ auth()->user()->student->kelas }}</td>
+                                            <td class="font-weight-bold">{{ $user->student->kelas }}</td>
                                         </tr>
                                         <tr class="border-bottom">
                                             <td>
                                                 <div class="font-weight-bold">Jurusan</div>
                                             </td>
-                                            <td class="font-weight-bold text-uppercase">{{ auth()->user()->student->jurusan }}
+                                            <td class="font-weight-bold text-uppercase">{{ $user->student->jurusan }}
                                             </td>
                                         </tr>
                                     </tbody>

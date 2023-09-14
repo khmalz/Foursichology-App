@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ReportListController;
 use App\Http\Controllers\Admin\ReportSiswaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -33,9 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
     });
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::resource('report', ReportListController::class);
 });
