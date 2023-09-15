@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ReportListController;
 use App\Http\Controllers\Admin\ReportSiswaController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,15 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:super admin|admin')->group(function () {
+        Route::middleware('role:super admin')->group(function () {
+
+            route::prefix('account')->as('account.')->group(function () {
+                Route::resource('admin', AdminController::class)->parameters([
+                    'admin' => 'user'
+                ])->except('show');
+            });
+        });
+
         Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
         Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
     });

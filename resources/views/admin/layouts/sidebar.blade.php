@@ -75,10 +75,13 @@
                 <i class="fas fa-fw fa-user"></i>
                 <span>User</span>
             </a>
-            <div id="userTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="userTab" class="{{ request()->routeIs('account.*') ? 'show' : '' }} collapse"
+                aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="collapse-inner rounded bg-white py-2">
-                    <a class="collapse-item" href="#">Siswa</a>
-                    <a class="collapse-item" href="#">Guru</a>
+                    <a class="collapse-item {{ request()->routeIs('account.admin.*') ? 'active' : '' }}"
+                        href="{{ route('account.admin.index') }}">Admin</a>
+                    <a class="collapse-item {{ request()->routeIs('account.siswa.*') ? 'active' : '' }}"
+                        href="{{ route('account.siswa.index') }}">Siswa</a>
                 </div>
             </div>
         </li>
