@@ -80,8 +80,8 @@
                 <div class="collapse-inner rounded bg-white py-2">
                     <a class="collapse-item {{ request()->routeIs('account.admin.*') ? 'active' : '' }}"
                         href="{{ route('account.admin.index') }}">Admin</a>
-                    <a class="collapse-item {{ request()->routeIs('account.siswa.*') ? 'active' : '' }}"
-                        href="{{ route('account.siswa.index') }}">Siswa</a>
+                    <a class="collapse-item {{ request()->routeIs('account.student.*') ? 'active' : '' }}"
+                        href="{{ route('account.student.index') }}">Siswa</a>
                 </div>
             </div>
         </li>

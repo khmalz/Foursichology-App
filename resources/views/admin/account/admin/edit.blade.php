@@ -42,6 +42,10 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="form-check mt-1">
+                                    <input type="checkbox" class="form-check-input" id="showPasswordCheckbox">
+                                    <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
+                                </div>
                             </div>
                             <!-- Submit button-->
                             <button class="btn btn-primary" type="submit">Edit admin</button>
@@ -52,3 +56,19 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Saat checkbox "Show Password" diubah
+            $("#showPasswordCheckbox").change(function() {
+                var passwordInput = $("#inputPassword");
+                if (this.checked) {
+                    passwordInput.attr("type", "text"); // Ubah tipe input menjadi teks
+                } else {
+                    passwordInput.attr("type", "password"); // Ubah tipe input menjadi password
+                }
+            });
+        });
+    </script>
+@endpush

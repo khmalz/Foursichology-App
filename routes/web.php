@@ -5,6 +5,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ReportListController;
 use App\Http\Controllers\Admin\ReportSiswaController;
 
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
                 Route::resource('admin', AdminController::class)->parameters([
                     'admin' => 'user'
                 ])->except('show');
+                Route::resource('student', StudentController::class)->except('show');
             });
         });
 
