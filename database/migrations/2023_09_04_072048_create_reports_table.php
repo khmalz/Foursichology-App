@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Student::class)->cascadeOnDelete();
+            $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
             $table->text('description');
             $table->boolean('anonim')->default(false);
             $table->enum('status', ['pending', 'progress', 'solve'])->default('pending');
