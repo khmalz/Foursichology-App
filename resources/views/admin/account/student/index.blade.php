@@ -114,18 +114,26 @@
                         "copy",
                         "excel",
                         {
-                            extend: "pdf",
+                            extend: 'pdf',
                             customize: function(doc) {
+                                // Mengatur properti alignment menjadi center untuk seluruh teks dalam tabel
                                 doc.content[1].table.body.forEach(function(row) {
                                     row.forEach(function(cell) {
-                                        cell.alignment = "center";
+                                        cell.alignment = 'center';
                                     });
                                     row.splice(-1, 1);
                                 });
+
+                                // Mengatur lebar kolom agar semua kolom terlihat dalam satu halaman PDF
+                                let colWidth = 100 / doc.content[1].table.body[0].length + '%';
+
                                 doc.content[1].table.widths = Array(doc.content[1].table.body[0].length)
-                                    .fill("*");
+                                    .fill(colWidth);
+
+                                // Menambahkan margin ke sisi kiri dan kanan
+                                doc.pageMargins = [10, 10, 10, 10];
                             },
-                        },
+                        }
                     ],
                     "stateSave": true,
                     "stateDuration": 60 * 5,
