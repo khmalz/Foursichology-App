@@ -9,7 +9,7 @@
     <meta content="Provide information about the importance of mental health" name="description" />
     <meta name="author" content="Khairul Akmal">
 
-    <title>{{ config('app.name') }} - Dashboard</title>
+    <title>{{ config('app.name') }} - {{ $title ?? 'Dashboard' }}</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="{{ asset('frontend/plugins/fontawesome-free/css/all.min.css') }}">

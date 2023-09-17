@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.main', ['title' => 'Report'])
 
 @push('styles')
     <link href="{{ asset('admin/vendor/datatables/datatables.min.css') }}" rel="stylesheet">

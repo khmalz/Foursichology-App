@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.main', ['title' => 'Account Siswa'])
 
 @section('content')
     <div class="container-fluid mt-4 px-4">
@@ -6,7 +6,7 @@
             <div class="col">
                 <!-- Account edit card-->
                 <div class="card mb-4">
-                    <div class="card-header">Student Account Edit</div>
+                    <div class="card-header">Siswa Account Edit</div>
                     <form action="{{ route('account.student.update', $student->id) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -15,7 +15,7 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputName">Name</label>
                                 <input class="form-control @error('name') is-invalid @enderror" name="name"
-                                    id="inputName" type="text" placeholder="Enter your name"
+                                    id="inputName" type="text" placeholder="Enter name"
                                     value="{{ old('name', $student->user->name) }}" />
                                 @error('name')
                                     <div class="invalid-feedback">
@@ -26,7 +26,7 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Email address</label>
                                 <input class="form-control @error('email') is-invalid @enderror" id="inputEmailAddress"
-                                    name="email" type="email" placeholder="Enter your email address"
+                                    name="email" type="email" placeholder="Enter email address"
                                     value="{{ old('email', $student->user->email) }}" />
                                 @error('email')
                                     <div class="invalid-feedback">
@@ -37,7 +37,7 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputPassword">Password (Optional)</label>
                                 <input class="form-control @error('password') is-invalid @enderror" id="inputPassword"
-                                    name="password" type="password" placeholder="Enter your password" />
+                                    name="password" type="password" placeholder="Enter password" />
                                 @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -54,7 +54,7 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputNis">NIS</label>
                                 <input class="form-control @error('nis') is-invalid @enderror" name="nis" id="inputNis"
-                                    type="number" placeholder="Enter your nis" value="{{ old('nis', $student->nis) }}" />
+                                    type="number" placeholder="Enter NIS" value="{{ old('nis', $student->nis) }}" />
                                 @error('nis')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -137,7 +137,7 @@
                                 @enderror
                             </div>
                             <!-- Submit button-->
-                            <button class="btn btn-primary" type="submit">Edit student</button>
+                            <button class="btn btn-primary" type="submit">Edit siswa</button>
                         </div>
                     </form>
                 </div>

@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.main', ['title' => 'Account Siswa'])
 
 @push('styles')
     <link href="{{ asset('admin/vendor/datatables/datatables.min.css') }}" rel="stylesheet">
@@ -12,7 +12,7 @@
         <!-- DataTales Example -->
         <div class="card mb-4 shadow">
             <div class="card-header d-flex justify-content-between align-items-center py-3">
-                <h6 class="font-weight-bold text-primary m-0">Student</h6>
+                <h6 class="font-weight-bold text-primary m-0">Siswa</h6>
 
                 <div>
                     <a class="btn btn-success" href="{{ route('account.student.create') }}">

@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.main', ['title' => 'Account Admin'])
 
 @section('content')
     <div class="container-fluid mt-4 px-4">
