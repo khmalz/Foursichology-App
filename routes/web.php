@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ReportListController;
 use App\Http\Controllers\Admin\ReportSiswaController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,13 +41,14 @@ Route::middleware('auth')->group(function () {
                 Route::resource('student', StudentController::class)->except('show');
             });
         });
+
+        Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
+        Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
+
+        Route::resource('report', ReportListController::class);
     });
-
+    Route::post('/report/{report}/comments', [CommentController::class, 'store'])->name('comment.store');
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-    Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
-    Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
-
-    Route::resource('report', ReportListController::class);
 });
 
 Route::middleware('auth')->group(function () {
