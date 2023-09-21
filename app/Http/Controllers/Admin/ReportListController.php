@@ -21,8 +21,7 @@ class ReportListController extends Controller
      */
     public function pending()
     {
-        $reports = Report::with('student')->whereStatus('pending')->get();
-
+        $reports = Report::whereStatus('pending', 'progress')->with('student')->get();
         return view('admin.reports.pending', compact('reports'));
     }
 
@@ -31,7 +30,7 @@ class ReportListController extends Controller
      */
     public function solve()
     {
-        $reports = Report::whereStatus('solve')->get();
+        $reports = Report::whereStatus('solve')->with('student')->get();
 
         return view('admin.reports.solve', compact('reports'));
     }
@@ -75,7 +74,15 @@ class ReportListController extends Controller
      */
     public function update(Request $request, Report $report)
     {
-        //
+        $request->validate([
+            'status' => ['required']
+        ]);
+
+        $report->update([
+            'status' => $request->status
+        ]);
+
+        return to_route('report.pending')->with('success', 'Successfully edited status a report');
     }
 
     /**

@@ -33,7 +33,6 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:super admin|admin')->group(function () {
         Route::middleware('role:super admin')->group(function () {
-
             route::prefix('account')->as('account.')->group(function () {
                 Route::resource('admin', AdminController::class)->parameters([
                     'admin' => 'user'
@@ -41,12 +40,11 @@ Route::middleware('auth')->group(function () {
                 Route::resource('student', StudentController::class)->except('show');
             });
         });
-
-        Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
-        Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
     });
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
+    Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
 
     Route::resource('report', ReportListController::class);
 });

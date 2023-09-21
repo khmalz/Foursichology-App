@@ -22,9 +22,11 @@ class Report extends Model
         'created_at' => 'datetime',
     ];
 
-    public function scopeWhereStatus($query, string $status)
+    public function scopeWhereStatus($query, string $status1, ?string $status2 = null)
     {
-        return $query->where('status', $status);
+        return $query->where('status', $status1)->when($status2, function ($query) use ($status2) {
+            $query->orWhere('status', $status2);
+        });
     }
 
     public function images(): HasMany
