@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('report', ReportListController::class);
     });
     Route::post('/report/{report}/comments', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('/report/{report}/{comment}/reply', [CommentController::class, 'reply'])->name('comment.reply');
+    Route::delete('/report/{report}/{comment}/delete', [CommentController::class, 'destroy'])->name('comment.destroy');
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 });
 

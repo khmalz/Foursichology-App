@@ -18,4 +18,22 @@ class CommentController extends Controller
 
         return to_route('report.show', $report);
     }
+
+    public function reply(Request $request, Report $report, Comment $comment)
+    {
+        $request->validate([
+            'content' => ['required']
+        ]);
+
+        $report->comment($request->content, parent: $comment);
+
+        return to_route('report.show', $report);
+    }
+
+    public function destroy(Request $request,  Report $report, Comment $comment)
+    {
+        $comment->delete();
+
+        return to_route('report.show', $report);
+    }
 }

@@ -8,9 +8,6 @@
                 class="card-header p-md-5 border-bottom-0 text-white-50 {{ $report->status == 'pending' ? 'bg-gradient-warning' : ($report->status == 'progress' ? 'bg-gradient-info' : 'bg-gradient-success') }} p-4">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-12 col-lg-auto mb-lg-0 text-lg-start mb-5 text-center">
-                        <!-- Invoice branding-->
-                        <img class="invoice-brand-img rounded-circle mb-4"
-                            src="{{ asset('/admin/assets/img/demo/demo-logo.svg') }}" alt="">
                         <div class="h2 mb-0 text-white">Report</div>
                     </div>
                     <div class="col-12 col-lg-auto text-lg-end text-center">
@@ -92,10 +89,23 @@
             <div class="comment-content p-3">
                 @foreach ($report->comments as $comment)
                     <div class="card mb-2 shadow">
-                        <div class="card-header py-3">
+                        <div class="card-header d-flex align-items-center justify-content-between flex-row py-3">
                             <h6 class="m-0"><span class="font-weight-bold">{{ $comment->user->name }}</span>
                                 <small>{{ $comment->created_at->diffForHumans() }}</small>
                             </h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right animated--fade-in shadow"
+                                    aria-labelledby="dropdownMenuLink" style="">
+                                    <button type="button" class="dropdown-item" data-toggle="modal"
+                                        data-target="#modalDeleteComment{{ $comment->id }}">
+                                        Delete Comment
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <small>
@@ -103,6 +113,27 @@
                                     {{ $comment->content }}
                                 </p>
                             </small>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalDeleteComment{{ $comment->id }}" tabindex="-1"
+                        aria-labelledby="modalDeleteLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalDeleteLabel">Apakah kamu yakin untuk menghapus
+                                        komentar?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <form action="{{ route('comment.destroy', [$report, $comment]) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -114,14 +145,14 @@
                     <div class="card-body">
                         <div class="form-group">
                             <textarea name="content" id="content" rows="2" class="form-control @error('content') is-invalid @enderror"
-                                placeholder="leave a comment"></textarea>
+                                placeholder="Leave a comment"></textarea>
                             @error('content')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <button class="btn btn-primary btn-sm" type="submit">Comment</button>
+                        <button class="btn btn-primary btn-sm rounded" type="submit">Comment</button>
                     </div>
                 </form>
             </div>

@@ -56,7 +56,14 @@ class ReportListController extends Controller
      */
     public function show(Report $report)
     {
-        $report->load('student.user', 'images', 'comments.user');
+        $report->load([
+            'student.user',
+            'images',
+            'comments' => function ($query) {
+                $query->whereNull('parent_id');
+            },
+            'comments.user',
+        ]);
 
         return view('admin.reports.detail', compact('report'));
     }
