@@ -54,11 +54,6 @@
                                             </i>
                                             Detail
                                         </a>
-                                        <a class="btn btn-info btn-sm" href="{{ route('report.edit', $report->id) }}">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

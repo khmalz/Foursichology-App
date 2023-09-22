@@ -1,19 +1,32 @@
+@php
+    $statusClass = '';
+    if ($report->trashed()) {
+        $statusClass = 'bg-gradient-danger';
+    } elseif ($report->status == 'pending') {
+        $statusClass = 'bg-gradient-warning';
+    } elseif ($report->status == 'progress') {
+        $statusClass = 'bg-gradient-info';
+    } else {
+        $statusClass = 'bg-gradient-success';
+    }
+@endphp
+
 @extends('admin.layouts.main', ['title' => 'Report Detail'])
 
 @section('content')
     <div class="container-fluid mt-4 px-4">
         <!-- Invoice-->
         <div class="card">
-            <div
-                class="card-header p-md-5 border-bottom-0 text-white-50 {{ $report->status == 'pending' ? 'bg-gradient-warning' : ($report->status == 'progress' ? 'bg-gradient-info' : 'bg-gradient-success') }} p-4">
+            <div class="card-header p-md-5 border-bottom-0 text-white-50 {{ $statusClass }} p-4">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-12 col-lg-auto mb-lg-0 text-lg-start mb-5 text-center">
                         <div class="h2 mb-0 text-white">Report</div>
                     </div>
                     <div class="col-12 col-lg-auto text-lg-end text-center">
                         <!-- Invoice details-->
-                        <div class="h3 text-capitalize text-white">{{ $report->status }}</div>
-                        Tanggal Pengaduan
+                        <div class="h3 text-capitalize text-white">{{ $report->trashed() ? 'canceled' : $report->status }}
+                        </div>
+                        Tanggal Pengaduanw
                         <br>
                         {{ $report->created_at->format('d F Y') }}
                     </div>
@@ -81,7 +94,7 @@
                     </div>
                 </div>
                 @role('admin')
-                    @if (!$report->trashed())
+                    @if (!$report->trashed() && !$report->status == 'solve')
                         <div class="row">
                             <div class="col-12">
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
