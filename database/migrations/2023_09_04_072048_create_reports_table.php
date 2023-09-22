@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->boolean('anonim')->default(false);
             $table->enum('status', ['pending', 'progress', 'solve'])->default('pending');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

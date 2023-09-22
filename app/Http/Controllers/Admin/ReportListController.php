@@ -97,6 +97,8 @@ class ReportListController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        $report->delete();
+
+        return to_route('report.pending')->with('success', 'Successfully canceled a report');
     }
 }
