@@ -26,7 +26,7 @@
                         <!-- Invoice details-->
                         <div class="h3 text-capitalize text-white">{{ $report->trashed() ? 'canceled' : $report->status }}
                         </div>
-                        Tanggal Pengaduanw
+                        Tanggal Pengaduan
                         <br>
                         {{ $report->created_at->format('d F Y') }}
                     </div>
@@ -94,31 +94,104 @@
                     </div>
                 </div>
                 @role('admin')
-                    @if (!$report->trashed() && !$report->status == 'solve')
-                        <div class="row">
+                    @if (!$report->trashed())
+                        <div class="row mb-3">
                             <div class="col-12">
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                    data-target="#modalDelete{{ $report->id }}">
-                                    Cancel Report
-                                </button>
-                            </div>
-                            <div class="modal fade" id="modalDelete{{ $report->id }}" tabindex="-1"
-                                aria-labelledby="modalDeleteLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalDeleteLabel">Apakah kamu yakin untuk membatalkan
-                                                laporan?</h5>
+                                @if ($report->status != 'solve')
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#modalDelete{{ $report->id }}">
+                                        Cancel Report
+                                    </button>
+                                    <div class="modal fade" id="modalDelete{{ $report->id }}" tabindex="-1"
+                                        aria-labelledby="modalDeleteLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalDeleteLabel">Apakah kamu yakin untuk
+                                                        membatalkan
+                                                        laporan?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <form action="{{ route('report.destroy', $report) }}" method="POST"
+                                                        class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger">Cancel Report</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
-                                            <form action="{{ route('report.destroy', $report) }}" method="POST"
+                                    </div>
+                                @endif
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#modalChangeStatus{{ $report->id }}">
+                                    Ubah Status
+                                </button>
+                                <div class="modal fade" id="modalChangeStatus{{ $report->id }}" tabindex="-1"
+                                    aria-labelledby="modalChangeStatusLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalChangeStatusLabel">Ganti Status</h5>
+                                            </div>
+                                            <form action="{{ route('report.update', $report->id) }}" method="POST"
                                                 class="d-inline">
                                                 @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger">Cancel Report</button>
+                                                @method('patch')
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="statusSelect">Status:</label>
+                                                        <select class="form-control" id="statusSelect" name="status">
+                                                            <option
+                                                                {{ old('status', $report->status) == 'pending' ? 'selected' : null }}
+                                                                value="pending">Pending</option>
+                                                            <option
+                                                                {{ old('status', $report->status) == 'progress' ? 'selected' : null }}
+                                                                value="progress">Progress</option>
+                                                            <option
+                                                                {{ old('status', $report->status) == 'solve' ? 'selected' : null }}
+                                                                value="solve">Solve</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary">Ganti Status</button>
+                                                </div>
                                             </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                    data-target="#modalRestore{{ $report->id }}">
+                                    <i class="fas fa-history"></i>
+                                    Restore Report
+                                </button>
+                                <div class="modal fade" id="modalRestore{{ $report->id }}" tabindex="-1"
+                                    aria-labelledby="modalRestoreLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalRestoreLabel">Restore Report</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <form action="{{ route('report.restore', $report) }}" method="POST"
+                                                    class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary">Restore
+                                                        Report</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
