@@ -43,10 +43,10 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::middleware('role:admin')->group(function () {
-            Route::get('report/cancel', [ReportListController::class, 'cancel'])->name('report.cancel');
             Route::post('report/{report}/restore', [ReportListController::class, 'restore'])->name('report.restore')->withTrashed();
         });
 
+        Route::get('report/cancel', [ReportListController::class, 'cancel'])->name('report.cancel');
         Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
         Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
 
