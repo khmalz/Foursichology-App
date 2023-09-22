@@ -36,6 +36,8 @@
             aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 @hasanyrole('super admin|admin')
+                    <a class="collapse-item {{ request()->routeIs('report.cancel') ? 'active' : '' }}"
+                        href="{{ route('report.cancel') }}">Dibatalkan</a>
                     <a class="collapse-item {{ request()->routeIs('report.pending') ? 'active' : '' }}"
                         href="{{ route('report.pending') }}">Belum Selesai</a>
                     <a class="collapse-item {{ request()->routeIs('report.solve') ? 'active' : '' }}"

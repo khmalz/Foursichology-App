@@ -36,6 +36,16 @@ class ReportListController extends Controller
     }
 
     /**
+     * Display a listing with canceled reports.
+     */
+    public function cancel()
+    {
+        $reports = Report::onlyTrashed()->with('student')->get();
+        return view('admin.reports.cancel', compact('reports'));
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -93,10 +103,23 @@ class ReportListController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Restore the specified resource from storage.
+     */
+    public function restore(Report $report)
+    {
+        if (!$report->trashed()) return back()->with('failed', 'The report was not canceled');
+
+        $report->restore();
+        return to_route('report.pending')->with('success', 'Successfully canceled a report');
+    }
+
+    /**
+     * Remove soft the specified resource from storage.
      */
     public function destroy(Report $report)
     {
+        if ($report->trashed()) return back()->with('failed', 'The report was in canceled status');
+
         $report->delete();
 
         return to_route('report.pending')->with('success', 'Successfully canceled a report');

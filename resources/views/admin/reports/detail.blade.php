@@ -80,33 +80,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                            data-target="#modalDelete{{ $report->id }}">
-                            Cancel Report
-                        </button>
-                    </div>
-                    <div class="modal fade" id="modalDelete{{ $report->id }}" tabindex="-1"
-                        aria-labelledby="modalDeleteLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalDeleteLabel">Apakah kamu yakin untuk membatalkan
-                                        laporan?</h5>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <form action="{{ route('report.destroy', $report) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger">Cancel Report</button>
-                                    </form>
+                @role('admin')
+                    @if (!$report->trashed())
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                    data-target="#modalDelete{{ $report->id }}">
+                                    Cancel Report
+                                </button>
+                            </div>
+                            <div class="modal fade" id="modalDelete{{ $report->id }}" tabindex="-1"
+                                aria-labelledby="modalDeleteLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDeleteLabel">Apakah kamu yakin untuk membatalkan
+                                                laporan?</h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <form action="{{ route('report.destroy', $report) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger">Cancel Report</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    @endif
+                @endrole
             </div>
         </div>
 
