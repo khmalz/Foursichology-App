@@ -97,6 +97,12 @@
                     <i class="fas fa-envelope fa-sm fa-fw mr-2 text-gray-400"></i>
                     {{ auth()->user()->email }}
                 </span>
+                @role('siswa')
+                    <a class="dropdown-item" href="{{ route('pengaduan.index') }}">
+                        <i class="fas fa-file-signature fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Pengaduan
+                    </a>
+                @endrole
                 {{-- <a class="dropdown-item" href="{{ url('#') }}">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     Activity Log

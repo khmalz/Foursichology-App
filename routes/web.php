@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/pengaduan', [ReportController::class, 'index'])->name('pengaduan.index');
         Route::post('/pengaduan', [ReportController::class, 'store'])->name('pengaduan.store');
 
+        Route::get('my-report/cancel', [ReportSiswaController::class, 'cancel'])->name('my-report.cancel');
         Route::get('my-report/pending', [ReportSiswaController::class, 'pending'])->name('my-report.pending');
         Route::get('my-report/solve', [ReportSiswaController::class, 'solve'])->name('my-report.solve');
 

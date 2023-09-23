@@ -8,14 +8,24 @@ use Illuminate\Http\Request;
 
 class ReportSiswaController extends Controller
 {
+
+    /**
+     * Display a listing with canceled reports.
+     */
+    public function cancel()
+    {
+        $reports = Report::onlyTrashed()->where('student_id', auth()->user()->student->id)->get();
+        return view('reports.cancel', compact('reports'));
+    }
+
     /**
      * Display a listing with status pending of reports.
      */
     public function pending()
     {
-        $reports = Report::whereStatus('pending')->where('student_id', auth()->user()->student->id)->get();
+        $reports = Report::whereStatus('pending', 'progress')->where('student_id', auth()->user()->student->id)->get();
 
-        return $reports;
+        return view('reports.pending', compact('reports'));
     }
 
     /**
@@ -25,6 +35,6 @@ class ReportSiswaController extends Controller
     {
         $reports = Report::whereStatus('solve')->where('student_id', auth()->user()->student->id)->get();
 
-        return $reports;
+        return view('reports.solve', compact('reports'));
     }
 }

@@ -32,7 +32,8 @@
             <i class="fas fa-fw fa-paste"></i>
             <span>Laporan</span>
         </a>
-        <div id="laporanTab" class="{{ request()->routeIs('report.*') ? 'show' : '' }} collapse"
+        <div id="laporanTab"
+            class="{{ request()->routeIs('report.*') || request()->routeIs('my-report.*') ? 'show' : '' }} collapse"
             aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 @hasanyrole('super admin|admin')
@@ -43,6 +44,8 @@
                     <a class="collapse-item {{ request()->routeIs('report.solve') ? 'active' : '' }}"
                         href="{{ route('report.solve') }}">Sudah Selesai</a>
                 @else
+                    <a class="collapse-item {{ request()->routeIs('my-report.cancel') ? 'active' : '' }}"
+                        href="{{ route('my-report.cancel') }}">Dibatalkan</a>
                     <a class="collapse-item {{ request()->routeIs('my-report.pending') ? 'active' : '' }}"
                         href="{{ route('my-report.pending') }}">Belum Selesai</a>
                     <a class="collapse-item {{ request()->routeIs('my-report.solve') ? 'active' : '' }}"
