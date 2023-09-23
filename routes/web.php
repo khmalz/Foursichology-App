@@ -54,9 +54,10 @@ Route::middleware('auth')->group(function () {
         Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
         Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
 
-        Route::get('report/{report}', [ReportListController::class, 'show'])->name('report.show')->withTrashed();
         Route::resource('report', ReportListController::class)->except('show');
     });
+
+    Route::get('report/{report}', [ReportListController::class, 'show'])->name('report.show')->withTrashed();
 
     Route::post('/report/{report}/comments', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/report/{report}/{comment}/reply', [CommentController::class, 'reply'])->name('comment.reply');

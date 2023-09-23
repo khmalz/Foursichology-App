@@ -64,16 +64,18 @@ class ReportListController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Report $report)
+    public function show(Request $request, Report $report)
     {
         $report->load([
-            'student.user',
+            'student',
             'images',
             'comments' => function ($query) {
                 $query->whereNull('parent_id');
             },
             'comments.user',
         ]);
+
+        abort_if($request->user()->hasRole('siswa') && $report->student->user_id != $request->user()->id, 403);
 
         return view('admin.reports.detail', compact('report'));
     }

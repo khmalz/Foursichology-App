@@ -42,11 +42,19 @@
                         <tbody>
                             @foreach ($reports as $report)
                                 <tr>
-                                    <td>{{ $report->student->nis }}</td>
-                                    <td>{{ $report->student->user->name }}</td>
-                                    <td>{{ $report->student->kelas }}</td>
-                                    <td class="text-uppercase">{{ $report->student->jurusan }}</td>
-                                    <td>{{ $report->student->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                    @if ($report->anonim)
+                                        <td>-</td>
+                                        <td>Anonim</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    @else
+                                        <td>{{ $report->student->nis }}</td>
+                                        <td>{{ $report->student->user->name }}</td>
+                                        <td>{{ $report->student->kelas }}</td>
+                                        <td class="text-uppercase">{{ $report->student->jurusan }}</td>
+                                        <td>{{ $report->student->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                    @endif
                                     <td>{{ $report->created_at->format('d F Y') }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('report.show', $report->id) }}">

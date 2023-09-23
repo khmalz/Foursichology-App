@@ -37,34 +37,40 @@
                 <div class="table-responsive">
                     <table class="table-borderless mb-0 table">
                         <tbody>
-                            <!-- Invoice item 1-->
-                            <tr class="border-bottom">
-                                <td>
-                                    <div class="font-weight-bold">NIS</div>
-                                </td>
-                                <td class="font-weight-bold text-end">{{ $report->student->nis }}</td>
-                            </tr>
-                            <!-- Invoice item 2-->
-                            <tr class="border-bottom">
-                                <td>
-                                    <div class="font-weight-bold">Name</div>
-                                </td>
-                                <td class="font-weight-bold text-end">{{ $report->student->user->name }}</td>
-                            </tr>
-                            <!-- Invoice item 3-->
-                            <tr class="border-bottom">
-                                <td>
-                                    <div class="font-weight-bold">Kelas</div>
-                                </td>
-                                <td class="font-weight-bold text-end">{{ $report->student->kelas }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>
-                                    <div class="font-weight-bold">Jurusan</div>
-                                </td>
-                                <td class="font-weight-bold text-uppercase text-end">{{ $report->student->jurusan }}</td>
-                            </tr>
-                            <!-- Invoice subtotal-->
+                            @if ($report->anonim)
+                                <tr class="border-bottom">
+                                    <td>
+                                        <div class="font-weight-bold">Anonim
+                                            {{ $report->student->user_id == auth()->id() ? '(Your Report)' : null }}</div>
+                                    </td>
+                                </tr>
+                            @else
+                                <tr class="border-bottom">
+                                    <td>
+                                        <div class="font-weight-bold">NIS</div>
+                                    </td>
+                                    <td class="font-weight-bold text-end">{{ $report->student->nis }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <td>
+                                        <div class="font-weight-bold">Name</div>
+                                    </td>
+                                    <td class="font-weight-bold text-end">{{ $report->student->user->name }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <td>
+                                        <div class="font-weight-bold">Kelas</div>
+                                    </td>
+                                    <td class="font-weight-bold text-end">{{ $report->student->kelas }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <td>
+                                        <div class="font-weight-bold">Jurusan</div>
+                                    </td>
+                                    <td class="font-weight-bold text-uppercase text-end">{{ $report->student->jurusan }}
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -209,22 +215,25 @@
                 @foreach ($report->comments as $comment)
                     <div class="card mb-2 shadow">
                         <div class="card-header d-flex align-items-center justify-content-between flex-row py-3">
-                            <h6 class="m-0"><span class="font-weight-bold">{{ $comment->user->name }}</span>
+                            <h6 class="m-0"><span
+                                    class="font-weight-bold">{{ $comment->user->id == $report->student->user_id ? 'Siswa' : $comment->user->name }}</span>
                                 <small>{{ $comment->created_at->diffForHumans() }}</small>
                             </h6>
-                            <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right animated--fade-in shadow"
-                                    aria-labelledby="dropdownMenuLink" style="">
-                                    <button type="button" class="dropdown-item" data-toggle="modal"
-                                        data-target="#modalDeleteComment{{ $comment->id }}">
-                                        Delete Comment
-                                    </button>
+                            @if ($comment->user->id == auth()->id())
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right animated--fade-in shadow"
+                                        aria-labelledby="dropdownMenuLink" style="">
+                                        <button type="button" class="dropdown-item" data-toggle="modal"
+                                            data-target="#modalDeleteComment{{ $comment->id }}">
+                                            Delete Comment
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                         <div class="card-body">
                             <small>

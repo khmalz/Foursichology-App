@@ -21,6 +21,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal Pengaduan</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -28,6 +29,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal Pengaduan</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -36,6 +38,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $report->created_at->format('d F Y') }}</td>
+                                    <td class="text-capitalize">{{ $report->anonim ? 'anonim' : 'tidak anonim' }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('report.show', $report->id) }}">
                                             <i class="fas fa-info">
