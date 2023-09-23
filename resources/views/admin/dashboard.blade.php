@@ -93,8 +93,15 @@
                 <div class="col-lg-12 mb-4">
                     <!-- Approach -->
                     <div class="card mb-4 shadow">
-                        <div class="card-header py-3">
+                        <div class="card-header d-flex justify-content-between align-items-center py-3">
                             <h6 class="font-weight-bold text-primary m-0">Profile Detail</h6>
+
+                            <div>
+                                <a class="btn btn-primary text-primary border-0 bg-transparent"
+                                    href="{{ route('profile.edit') }}">
+                                    Edit Profile
+                                </a>
+                            </div>
                         </div>
 
                         <div class="card-body">

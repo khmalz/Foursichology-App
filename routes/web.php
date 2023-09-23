@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('my-report/pending', [ReportSiswaController::class, 'pending'])->name('my-report.pending');
         Route::get('my-report/solve', [ReportSiswaController::class, 'solve'])->name('my-report.solve');
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     });
 
     Route::middleware('role:super admin|admin')->group(function () {
@@ -53,16 +56,11 @@ Route::middleware('auth')->group(function () {
         Route::get('report/{report}', [ReportListController::class, 'show'])->name('report.show')->withTrashed();
         Route::resource('report', ReportListController::class)->except('show');
     });
+
     Route::post('/report/{report}/comments', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/report/{report}/{comment}/reply', [CommentController::class, 'reply'])->name('comment.reply');
     Route::delete('/report/{report}/{comment}/delete', [CommentController::class, 'destroy'])->name('comment.destroy');
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
