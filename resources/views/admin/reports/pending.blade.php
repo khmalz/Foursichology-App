@@ -19,7 +19,7 @@
             <div class="show collapse" id="collapseCardPending">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table-bordered table" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table-bordered table" id="dataTablePending" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>NIS</th>
@@ -118,7 +118,7 @@
             <div class="collapse" id="collapseCardProgress">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table-bordered table" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table-bordered table" id="dataTableProgress" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>NIS</th>
@@ -217,52 +217,8 @@
     <script src="{{ asset('admin/vendor/datatables/datatables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $("#dataTable")
-                .DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": [
-                        "copy",
-                        "excel",
-                        {
-                            extend: "pdf",
-                            customize: function(doc) {
-                                // Mengatur properti alignment menjadi center untuk seluruh teks dalam tabel
-                                doc.content[1].table.body.forEach(function(row) {
-                                    row.forEach(function(cell) {
-                                        cell.alignment = 'center';
-                                    });
-                                    row.splice(-1, 1);
-                                });
-
-                                // Mengatur lebar kolom agar semua kolom terlihat dalam satu halaman PDF
-                                let colWidth = 100 / doc.content[1].table.body[0].length + '%';
-
-                                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length)
-                                    .fill(colWidth);
-
-                                // Menambahkan margin ke sisi kiri dan kanan
-                                doc.pageMargins = [10, 10, 10, 10];
-                            },
-                        },
-                    ],
-                    "stateSave": true,
-                    "stateDuration": 60 * 5,
-                    "language": {
-                        "infoEmpty": "No entries to show",
-                        "search": "_INPUT_",
-                        "searchPlaceholder": "Search...",
-                    },
-                    "columnDefs": [{
-                        "searchable": false,
-                        "orderable": false,
-                        "targets": -1
-                    }]
-                })
-                .buttons()
-                .container()
-                .appendTo("#dataTable_wrapper .col-md-6:eq(0)");
+            generateDataTable('#dataTablePending')
+            generateDataTable('#dataTableProgress')
         });
     </script>
 @endpush

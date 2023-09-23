@@ -105,52 +105,7 @@
     <script src="{{ asset('admin/vendor/datatables/datatables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $("#dataTable")
-                .DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": [
-                        "copy",
-                        "excel",
-                        {
-                            extend: 'pdf',
-                            customize: function(doc) {
-                                // Mengatur properti alignment menjadi center untuk seluruh teks dalam tabel
-                                doc.content[1].table.body.forEach(function(row) {
-                                    row.forEach(function(cell) {
-                                        cell.alignment = 'center';
-                                    });
-                                    row.splice(-1, 1);
-                                });
-
-                                // Mengatur lebar kolom agar semua kolom terlihat dalam satu halaman PDF
-                                let colWidth = 100 / doc.content[1].table.body[0].length + '%';
-
-                                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length)
-                                    .fill(colWidth);
-
-                                // Menambahkan margin ke sisi kiri dan kanan
-                                doc.pageMargins = [10, 10, 10, 10];
-                            },
-                        }
-                    ],
-                    "stateSave": true,
-                    "stateDuration": 60 * 5,
-                    "language": {
-                        "infoEmpty": "No entries to show",
-                        "search": "_INPUT_",
-                        "searchPlaceholder": "Search...",
-                    },
-                    "columnDefs": [{
-                        "searchable": false,
-                        "orderable": false,
-                        "targets": -1
-                    }]
-                })
-                .buttons()
-                .container()
-                .appendTo("#dataTable_wrapper .col-md-6:eq(0)");
+            generateDataTable('#dataTable')
         });
     </script>
 @endpush
