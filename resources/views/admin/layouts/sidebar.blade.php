@@ -57,7 +57,7 @@
 
     @role('admin')
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('charts.html') }}">
+            <a class="nav-link" href="{{ route('inbox.index') }}">
                 <i class="fas fa-fw fa-info-circle"></i>
                 <span>Inbox</span>
             </a>

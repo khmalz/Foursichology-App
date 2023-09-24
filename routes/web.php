@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ReportListController;
 use App\Http\Controllers\Admin\ReportSiswaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\InboxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::middleware('role:admin')->group(function () {
+            Route::get('inbox', InboxController::class)->name('inbox.index');
             Route::post('report/{report}/restore', [ReportListController::class, 'restore'])->name('report.restore')->withTrashed();
         });
 
