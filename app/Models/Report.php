@@ -18,10 +18,12 @@ class Report extends Model
         'description',
         'anonim',
         'status',
+        'reminder_date'
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
+        'reminder_date' => 'datetime',
     ];
 
     public function scopeWhereStatus($query, string $status1, ?string $status2 = null)
