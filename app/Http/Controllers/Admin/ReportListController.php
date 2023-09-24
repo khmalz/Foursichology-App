@@ -75,9 +75,16 @@ class ReportListController extends Controller
             'comments.user',
         ]);
 
+        /**
+         * Reminder null, boleh
+         * Reminder lebih dari 12 jam, boleh
+         * Reminder kurang dari 12 jam, tidak boleh
+         */
+        $isReminderPassed = is_null($report->reminder_date) || $report->reminder_date->diffInHours(now()) >= 12;
+
         abort_if($request->user()->hasRole('siswa') && $report->student->user_id != $request->user()->id, 403);
 
-        return view('admin.reports.detail', compact('report'));
+        return view('admin.reports.detail', compact('report', 'isReminderPassed'));
     }
 
     /**

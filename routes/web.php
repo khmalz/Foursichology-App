@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::get('my-report/cancel', [ReportSiswaController::class, 'cancel'])->name('my-report.cancel');
         Route::get('my-report/pending', [ReportSiswaController::class, 'pending'])->name('my-report.pending');
         Route::get('my-report/solve', [ReportSiswaController::class, 'solve'])->name('my-report.solve');
+        Route::patch('my-report/{report}/reminder', [ReportSiswaController::class, 'reminder'])->name('my-report.reminder');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,7 +49,8 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::middleware('role:admin')->group(function () {
-            Route::get('inbox', InboxController::class)->name('inbox.index');
+            Route::get('inbox', [InboxController::class, 'index'])->name('inbox.index');
+            Route::post('inbox/read/{notifications?}', [InboxController::class, 'read'])->name('inbox.read');
             Route::post('report/{report}/restore', [ReportListController::class, 'restore'])->name('report.restore')->withTrashed();
         });
 

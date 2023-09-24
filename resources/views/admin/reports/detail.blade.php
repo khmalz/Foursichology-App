@@ -29,12 +29,44 @@
                         Tanggal Pengaduan
                         <br>
                         {{ $report->created_at->format('d F Y') }}
-                        <div class="mt-3">
-                            <a class="btn btn-sm btn-{{ $statusClass }} border" href="#">
-                                <i class="far fa-bell"></i>
-                                Reminder Admin
-                            </a>
-                        </div>
+                        @role('siswa')
+                            @if ($report->status !== 'canceled' && $report->status !== 'solve')
+                                <div class="mt-3">
+                                    <button type="button" {{ $isReminderPassed ? null : 'disabled' }}
+                                        class="btn btn-{{ $statusClass }} btn-sm border" data-toggle="modal"
+                                        data-target="#modalReminder{{ $report->id }}">
+                                        <i class="far fa-bell"></i>
+                                        Reminder Admin
+                                        @if ($report->reminder_date)
+                                            <small><span
+                                                    class="d-block">{{ $report->reminder_date->diffForHumans() }}</span></small>
+                                        @endif
+                                    </button>
+                                    <div class="modal fade" id="modalReminder{{ $report->id }}" tabindex="-1"
+                                        aria-labelledby="modalReminderLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-dark" id="modalReminderLabel">Reminder Admin
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <form action="{{ route('my-report.reminder', $report) }}" method="POST"
+                                                        class="d-inline">
+                                                        @csrf
+                                                        @method('patch')
+                                                        <input type="hidden" name="reminder" value="1">
+                                                        <button type="submit" class="btn btn-primary">Yakin?</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endrole
                     </div>
                 </div>
             </div>
