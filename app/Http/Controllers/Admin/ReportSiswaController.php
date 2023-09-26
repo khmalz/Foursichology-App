@@ -52,7 +52,7 @@ class ReportSiswaController extends Controller
             'reminder_date' => now()
         ]);
 
-        $request->user()->notify(new InboxNotification($report->id, $report->status));
+        $request->user()->notify(new InboxNotification('admin', $report->id, $report->status));
 
         return to_route('report.show', $report)->with('success', 'Successfully send reminder report for admin');
     }

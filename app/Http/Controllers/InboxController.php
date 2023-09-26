@@ -12,11 +12,14 @@ class InboxController extends Controller
      */
     public function index()
     {
-        $notifications = DatabaseNotification::whereDate('created_at', '>=', now())
-            ->orWhere(function ($query) {
-                $query->whereNull('read_at');
-            })
-            ->oldest('read_at')->get();
+        $notifications = DatabaseNotification::whereJsonContains('data->role', 'admin')
+            ->where(function ($query) {
+                $query->whereDate('created_at', '>=', now())
+                    ->orWhere(function ($query) {
+                        $query->whereDate('created_at', '<=', now())
+                            ->whereNull('read_at');
+                    });
+            })->oldest('read_at')->oldest()->get();
 
         return view('admin.inbox', compact('notifications'));
     }
@@ -27,7 +30,7 @@ class InboxController extends Controller
 
     public function read(?string $id = null)
     {
-        DatabaseNotification::when($id, function ($query) use ($id) {
+        DatabaseNotification::whereJsonContains('data->role', 'admin')->when($id, function ($query) use ($id) {
             $query->find($id);
         })->update(['read_at' => now()]);
 

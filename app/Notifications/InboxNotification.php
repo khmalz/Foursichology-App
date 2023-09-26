@@ -9,13 +9,14 @@ use Illuminate\Notifications\Notification;
 class InboxNotification extends Notification
 {
     use Queueable;
-    public $report_id, $status;
+    public $role, $report_id, $status;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(string|int $report_id, string $status)
+    public function __construct(string $role, string|int $report_id, string $status)
     {
+        $this->role = $role;
         $this->report_id = $report_id;
         $this->status = $status;
     }
@@ -38,6 +39,7 @@ class InboxNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
+            'role' => $this->role,
             'report_id' => $this->report_id,
             'status' => $this->status
         ];
