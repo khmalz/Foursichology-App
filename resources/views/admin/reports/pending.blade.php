@@ -66,50 +66,53 @@
                                                 </i>
                                                 Detail
                                             </a>
-                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                                data-target="#modalUpdate{{ $report->id }}">
-                                                <i class="fas fa-clipboard-check"></i>
-                                                </i>
-                                                Resolve
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <div class="modal fade" id="modalUpdate{{ $report->id }}" tabindex="-1"
-                                        aria-labelledby="modalUpdateLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalUpdateLabel">Ganti Status</h5>
-                                                </div>
-                                                <form action="{{ route('report.update', $report->id) }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('patch')
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="statusSelect">Status:</label>
-                                                            <select class="form-control" id="statusSelect" name="status">
-                                                                <option
-                                                                    {{ old('status', $report->status) == 'pending' ? 'selected' : null }}
-                                                                    value="pending">Pending</option>
-                                                                <option
-                                                                    {{ old('status', $report->status) == 'progress' ? 'selected' : null }}
-                                                                    value="progress">Progress</option>
-                                                                <option
-                                                                    {{ old('status', $report->status) == 'solve' ? 'selected' : null }}
-                                                                    value="solve">Solve</option>
-                                                            </select>
+                                            @role('admin')
+                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                                    data-target="#modalUpdate{{ $report->id }}">
+                                                    <i class="fas fa-clipboard-check"></i>
+                                                    </i>
+                                                    Resolve
+                                                </button>
+                                                <div class="modal fade" id="modalUpdate{{ $report->id }}" tabindex="-1"
+                                                    aria-labelledby="modalUpdateLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="modalUpdateLabel">Ganti Status</h5>
+                                                            </div>
+                                                            <form action="{{ route('report.update', $report->id) }}"
+                                                                method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('patch')
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label for="statusSelect">Status:</label>
+                                                                        <select class="form-control" id="statusSelect"
+                                                                            name="status">
+                                                                            <option
+                                                                                {{ old('status', $report->status) == 'pending' ? 'selected' : null }}
+                                                                                value="pending">Pending</option>
+                                                                            <option
+                                                                                {{ old('status', $report->status) == 'progress' ? 'selected' : null }}
+                                                                                value="progress">Progress</option>
+                                                                            <option
+                                                                                {{ old('status', $report->status) == 'solve' ? 'selected' : null }}
+                                                                                value="solve">Solve</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-info">Update</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Cancel</button>
-                                                        <button type="submit" class="btn btn-info">Update</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                </div>
+                                            @endrole
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
