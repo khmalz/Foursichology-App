@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Notifications\InboxNotification;
 
 class ReportListController extends Controller
 {
@@ -107,6 +108,8 @@ class ReportListController extends Controller
         $report->update([
             'status' => $request->status
         ]);
+
+        $request->user()->notify(new InboxNotification('siswa', $report->id, $report->status));
 
         return to_route('report.pending')->with('success', 'Successfully edited status a report');
     }

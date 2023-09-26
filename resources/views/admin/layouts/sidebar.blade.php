@@ -55,8 +55,17 @@
         </div>
     </li>
 
+    @role('siswa')
+        <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('notification.index') }}">
+                <i class="fas fa-fw fa-info-circle"></i>
+                <span>Notification</span>
+            </a>
+        </li>
+    @endrole
+
     @role('admin')
-        <li class="nav-item">
+        <li class="nav-item {{ request()->routeIs('inbox.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('inbox.index') }}">
                 <i class="fas fa-fw fa-info-circle"></i>
                 <span>Inbox</span>

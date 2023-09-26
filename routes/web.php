@@ -1,15 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InboxController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ReportListController;
 use App\Http\Controllers\Admin\ReportSiswaController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\InboxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,8 @@ Route::middleware('auth')->group(function () {
         Route::get('my-report/pending', [ReportSiswaController::class, 'pending'])->name('my-report.pending');
         Route::get('my-report/solve', [ReportSiswaController::class, 'solve'])->name('my-report.solve');
         Route::patch('my-report/{report}/reminder', [ReportSiswaController::class, 'reminder'])->name('my-report.reminder');
-
+        Route::get('notification', [NotificationController::class, 'index'])->name('notification.index');
+        Route::post('notification/read/{notifications?}', [NotificationController::class, 'read'])->name('notification.read');
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     });
