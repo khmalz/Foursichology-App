@@ -14,7 +14,7 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputName">Name</label>
                                 <input class="form-control @error('name') is-invalid @enderror" name="name"
-                                    id="inputName" type="email" placeholder="Enter name" value="{{ old('name') }}" />
+                                    id="inputName" type="text" placeholder="Enter name" value="{{ old('name') }}" />
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
