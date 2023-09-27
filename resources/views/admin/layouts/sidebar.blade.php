@@ -73,6 +73,19 @@
         </li>
     @endrole
 
+    @hasanyrole('admin|super admin')
+        <div class="sidebar-heading">
+            History
+        </div>
+
+        <li class="nav-item {{ request()->routeIs('history.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('history.index') }}">
+                <i class="fas fa-list fa-fw"></i>
+                <span>Activity Log</span>
+            </a>
+        </li>
+    @endhasanyrole
+
     @role('super admin')
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -108,14 +121,4 @@
     <div class="d-none d-md-inline text-center">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
-    <!-- Sidebar Message -->
-    <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="{{ asset('admin/img/undraw_rocket.svg') }}" alt="...">
-        <p class="mb-2 text-center"><strong>SB Admin Pro</strong> is packed with premium features, components,
-            and more!</p>
-        <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
-            Pro!</a>
-    </div>
-
 </ul>

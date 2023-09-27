@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Admin\HistoryController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ReportListController;
 use App\Http\Controllers\Admin\ReportSiswaController;
@@ -60,6 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('report/pending', [ReportListController::class, 'pending'])->name('report.pending');
         Route::get('report/solve', [ReportListController::class, 'solve'])->name('report.solve');
 
+        Route::get('history', [HistoryController::class, 'index'])->name('history.index');
         Route::resource('report', ReportListController::class)->except('show');
     });
 
