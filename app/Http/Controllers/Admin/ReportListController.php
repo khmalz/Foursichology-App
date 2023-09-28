@@ -6,6 +6,7 @@ use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\InboxNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ReportListController extends Controller
 {
@@ -128,6 +129,8 @@ class ReportListController extends Controller
         if (!$report->trashed()) return back()->with('failed', 'The report was not canceled');
 
         $report->restore();
+        Notification::send(auth()->user(), new InboxNotification('siswa', $report->id, 'restore'));
+
         return to_route('report.pending')->with('success', 'Successfully canceled a report');
     }
 
@@ -139,6 +142,7 @@ class ReportListController extends Controller
         if ($report->trashed()) return back()->with('failed', 'The report was in canceled status');
 
         $report->delete();
+        Notification::send(auth()->user(), new InboxNotification('siswa', $report->id, 'cancel'));
 
         return to_route('report.pending')->with('success', 'Successfully canceled a report');
     }

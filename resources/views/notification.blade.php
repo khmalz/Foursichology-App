@@ -27,6 +27,16 @@
                                                 class="text-info">Laporan</a>
                                             anda yang dilaporkan sedang dalam {{ $notification->data['status'] }}
                                         </span>
+                                    @elseif ($notification->data['status'] == 'cancel')
+                                        <span><a href="{{ route('report.show', $notification->data['report_id']) }}"
+                                                class="text-danger">Laporan</a>
+                                            anda yang dilaporkan telah dibatalkan
+                                        </span>
+                                    @elseif ($notification->data['status'] == 'restore')
+                                        <span><a href="{{ route('report.show', $notification->data['report_id']) }}"
+                                                class="text-info">Laporan</a>
+                                            anda yang dibatalkan telah dikembalikan
+                                        </span>
                                     @else
                                         <span><a href="{{ route('report.show', $notification->data['report_id']) }}"
                                                 class="text-success">Laporan</a>
