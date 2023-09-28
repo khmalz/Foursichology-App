@@ -111,6 +111,12 @@ class ReportListController extends Controller
 
         $request->user()->notify(new InboxNotification('siswa', $report->id, $report->status));
 
+        activity()
+            ->performedOn($report)
+            ->causedBy($request->user())
+            ->withProperties(['status' => $request->status])
+            ->log('Mengupdate laporan');
+
         return to_route('report.pending')->with('success', 'Successfully edited status a report');
     }
 
