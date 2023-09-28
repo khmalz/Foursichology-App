@@ -30,7 +30,7 @@
                         <br>
                         {{ $report->created_at->format('d F Y') }}
                         @role('siswa')
-                            @if ($report->status !== 'canceled' && $report->status !== 'solve')
+                            @if (!$report->trashed() && $report->status !== 'solve')
                                 <div class="mt-3">
                                     <button type="button" {{ $isReminderPassed ? null : 'disabled' }}
                                         class="btn btn-{{ $statusClass }} btn-sm border" data-toggle="modal"
