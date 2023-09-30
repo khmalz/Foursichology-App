@@ -84,6 +84,8 @@ php artisan serve
 
 Untuk memastikan gambar yang terupload akan muncul, Anda perlu mengkonfigurasi pada file .env. Sesuaikan dengan url dan host yang dijalankan di browser anda saat menjalankan project ini.
 
+contoh: `http://127.0.0.1:8000`
+
 ```
 APP_URL
 ```
