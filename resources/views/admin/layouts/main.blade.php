@@ -72,18 +72,29 @@
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": [
-                        "copy",
-                        "excel",
+                    "buttons": [{
+                            extend: "copy",
+                            exportOptions: {
+                                columns: ":not(:last-child)" // Mengabaikan kolom terakhir
+                            }
+                        },
+                        {
+                            extend: "excel",
+                            exportOptions: {
+                                columns: ":not(:last-child)" // Mengabaikan kolom terakhir
+                            }
+                        },
                         {
                             extend: "pdf",
+                            exportOptions: {
+                                columns: ":not(:last-child)" // Mengabaikan kolom terakhir
+                            },
                             customize: function(doc) {
                                 // Mengatur properti alignment menjadi center untuk seluruh teks dalam tabel
                                 doc.content[1].table.body.forEach(function(row) {
                                     row.forEach(function(cell) {
                                         cell.alignment = 'center';
                                     });
-                                    row.splice(-1, 1);
                                 });
 
                                 // Mengatur lebar kolom agar semua kolom terlihat dalam satu halaman PDF
@@ -107,7 +118,7 @@
                     "columnDefs": [{
                         "searchable": false,
                         "orderable": false,
-                        "targets": -1
+                        "targets": -1,
                     }]
                 })
                 .buttons()
