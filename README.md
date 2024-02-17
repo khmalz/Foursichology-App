@@ -62,6 +62,12 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+**Build Assets**
+
+```shell
+npm run build
+```
+
 **Migrate Database**
 
 ```shell
